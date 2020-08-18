@@ -1,0 +1,616 @@
+# -*- coding: mbcs -*-
+from part import *
+from material import *
+from section import *
+from assembly import *
+from step import *
+from interaction import *
+from load import *
+from mesh import *
+from optimization import *
+from job import *
+from sketch import *
+from visualization import *
+from connectorBehavior import *
+mdb.models['Model-2'].Material(name='Material-1')
+mdb.models['Model-2'].materials['Material-1'].Elastic(table=((200000000000.0, 
+    0.3), ))
+mdb.models['Model-2'].HomogeneousSolidSection(material='Material-1', name=
+    'Section-1', thickness=None)
+mdb.models['Model-2'].sections['Section-1'].setValues(material='Material-1', 
+    thickness=0.1)
+mdb.models['Model-2'].parts['Part-1'].Set(faces=
+    mdb.models['Model-2'].parts['Part-1'].faces.findAt(((21.530597, 5.298731, 
+    0.0), )), name='Set-4')
+mdb.models['Model-2'].parts['Part-1'].SectionAssignment(offset=0.0, 
+    offsetField='', offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-2'].parts['Part-1'].sets['Set-4'], sectionName=
+    'Section-1', thicknessAssignment=FROM_SECTION)
+mdb.models['Model-2'].rootAssembly.DatumCsysByDefault(CARTESIAN)
+mdb.models['Model-2'].rootAssembly.Instance(dependent=ON, name='Part-1-1', 
+    part=mdb.models['Model-2'].parts['Part-1'])
+mdb.models['Model-2'].StaticStep(name='Step-1', previous='Initial')
+mdb.models['Model-2'].rootAssembly.Set(edges=
+    mdb.models['Model-2'].rootAssembly.instances['Part-1-1'].edges.findAt(((
+    30.0, 22.5, 0.0), ), ((0.0, 7.5, 0.0), ), ), name='Set-1')
+mdb.models['Model-2'].DisplacementBC(amplitude=UNSET, createStepName='Step-1', 
+    distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None, name=
+    'BC-1', region=mdb.models['Model-2'].rootAssembly.sets['Set-1'], u1=0.0, 
+    u2=0.0, ur3=0.0)
+mdb.models['Model-2'].rootAssembly.Surface(name='Surf-1', side1Edges=
+    mdb.models['Model-2'].rootAssembly.instances['Part-1-1'].edges.findAt(((
+    7.5, 30.0, 0.0), )))
+mdb.models['Model-2'].Pressure(amplitude=UNSET, createStepName='Step-1', 
+    distributionType=UNIFORM, field='', magnitude=1000.0, name='Load-1', 
+    region=mdb.models['Model-2'].rootAssembly.surfaces['Surf-1'])
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Model-2', modelPrint=OFF, name=
+    'Job-2', nodalOutputPrecision=SINGLE, queue=None, resultsFormat=ODB, 
+    scratch='', type=ANALYSIS, userSubroutine='', waitHours=0, waitMinutes=0)
+mdb.jobs['Job-2'].submit(consistencyChecking=OFF)
+mdb.jobs['Job-2']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'Srikkanth', 'handle': 0, 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR TWO-DIMENSIONAL MODELS, IF A NON-UNITY THICKNESS IS SPECIFIED FOR TWO-DIMENSIONAL SOLID ELEMENTS AND THESE ELEMENTS ARE INVOLVED IN AN INTERACTION SUCH AS CONTACT, THE SAME THICKNESS SHOULD BE SPECIFIED FOR THE OUT-OF-PLANE THICKNESS OF THE CORRESPONDING SURFACE UNDER *SURFACE INTERACTION.', 
+    'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'Boundary conditions are specified on inactive dof of 42 nodes. The nodes have been identified in node set WarnNodeBCInactiveDof.', 
+    'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'D:\\TUM\\SEM_II\\Software_lab\\Stl_file_import\\Job-2.odb', 
+    'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'Srikkanth', 'handle': 4284, 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'Job-2', 'memory': 24.0})
+mdb.jobs['Job-2']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 8055.0, 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(MINIMUM_MEMORY, {'minimum_memory': 17.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(STATUS, {'totalTime': 1.0, 'attempts': 1, 
+    'timeIncrement': 1.0, 'increment': 1, 'stepTime': 1.0, 'step': 1, 
+    'jobName': 'Job-2', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['Job-2']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-2'})
+mdb.jobs['Job-2']._Message(JOB_COMPLETED, {'time': 'Tue Jul  3 14:19:21 2018', 
+    'jobName': 'Job-2'})
+mdb.models['Model-1'].ConstrainedSketch(name='__profile__', sheetSize=45.0)
+mdb.models['Model-1'].sketches['__profile__'].rectangle(point1=(0.0, 0.0), 
+    point2=(30.0, 30.0))
+mdb.models['Model-1'].Part(dimensionality=TWO_D_PLANAR, name='Part-1', type=
+    DEFORMABLE_BODY)
+mdb.models['Model-1'].parts['Part-1'].BaseShell(sketch=
+    mdb.models['Model-1'].sketches['__profile__'])
+del mdb.models['Model-1'].sketches['__profile__']
+mdb.models['Model-1'].rootAssembly.DatumCsysByDefault(CARTESIAN)
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name='Part-1', part=
+    mdb.models['Model-1'].parts['Part-1'])
+mdb.models['Model-1'].rootAssembly.regenerate()
+mdb.models['Model-1'].parts['Part-1'].setMeshControls(elemShape=QUAD, regions=
+    mdb.models['Model-1'].parts['Part-1'].faces.findAt(((1.5, 1.5, 0.0), )), 
+    technique=STRUCTURED)
+mdb.models['Model-1'].parts['Part-1'].setElementType(elemTypes=(ElemType(
+    elemCode=CPS4, elemLibrary=STANDARD), ElemType(elemCode=CPS4, 
+    elemLibrary=STANDARD)), regions=(
+    mdb.models['Model-1'].parts['Part-1'].faces.findAt(((1.5, 1.5, 0.0), )), ))
+mdb.models['Model-1'].parts['Part-1'].seedPart(deviationFactor=0.1, size=1.5)
+mdb.models['Model-1'].parts['Part-1'].generateMesh()
+mdb.meshEditOptions.setValues(enableUndo=True, maxUndoCacheElements=0.5)
+mdb.models['Model-1'].parts['Part-1'].PartFromMesh(copySets=True, name=
+    'orphan mesh')
+mdb.models['Model-1'].parts['orphan mesh'].Set(elements=
+    [mdb.models['Model-1'].parts['orphan mesh'].elements[107:108], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[108:109], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[109:110], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[110:111], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[111:112], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[112:113], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[126:127], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[127:128], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[132:133], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[133:134], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[145:146], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[146:147], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[153:154], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[154:155], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[165:166], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[174:175], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[185:186], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[194:195], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[205:206], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[214:215], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[225:226], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[234:235], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[245:246], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[246:247], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[253:254], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[254:255], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[266:267], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[267:268], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[272:273], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[273:274], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[287:288], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[288:289], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[289:290], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[290:291], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[291:292], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[292:293], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[128:129], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[129:130], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[130:131], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[131:132], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[147:148], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[148:149], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[149:150], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[150:151], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[151:152], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[152:153], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[166:167], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[167:168], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[168:169], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[169:170], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[170:171], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[171:172], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[172:173], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[173:174], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[186:187], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[187:188], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[188:189], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[189:190], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[190:191], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[191:192], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[192:193], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[193:194], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[206:207], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[207:208], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[208:209], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[209:210], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[210:211], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[211:212], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[212:213], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[213:214], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[226:227], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[227:228], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[228:229], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[229:230], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[230:231], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[231:232], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[232:233], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[233:234], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[247:248], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[248:249], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[249:250], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[250:251], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[251:252], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[252:253], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[268:269], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[269:270], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[270:271], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[271:272]], name=
+    'Set-1_alpha_0')
+mdb.models['Model-1'].parts['orphan mesh'].Set(elements=
+    [mdb.models['Model-1'].parts['orphan mesh'].elements[0:1], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[1:2], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[2:3], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[3:4], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[4:5], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[5:6], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[6:7], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[7:8], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[8:9], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[9:10], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[10:11], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[11:12], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[12:13], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[13:14], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[14:15], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[15:16], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[16:17], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[17:18], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[18:19], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[19:20], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[20:21], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[21:22], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[22:23], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[23:24], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[24:25], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[25:26], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[26:27], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[27:28], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[28:29], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[29:30], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[30:31], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[31:32], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[32:33], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[33:34], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[34:35], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[35:36], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[36:37], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[37:38], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[38:39], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[39:40], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[40:41], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[41:42], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[42:43], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[43:44], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[44:45], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[45:46], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[46:47], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[47:48], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[48:49], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[49:50], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[50:51], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[51:52], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[52:53], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[53:54], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[54:55], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[55:56], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[56:57], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[57:58], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[58:59], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[59:60], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[60:61], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[61:62], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[62:63], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[63:64], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[64:65], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[65:66], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[66:67], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[67:68], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[68:69], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[69:70], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[70:71], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[71:72], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[72:73], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[73:74], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[74:75], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[75:76], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[76:77], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[77:78], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[78:79], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[79:80], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[80:81], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[81:82], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[82:83], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[83:84], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[84:85], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[85:86], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[86:87], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[87:88], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[88:89], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[89:90], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[90:91], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[91:92], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[92:93], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[93:94], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[94:95], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[95:96], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[96:97], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[97:98], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[98:99], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[99:100], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[100:101], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[101:102], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[102:103], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[103:104], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[104:105], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[105:106], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[106:107], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[113:114], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[114:115], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[115:116], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[116:117], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[117:118], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[118:119], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[119:120], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[120:121], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[121:122], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[122:123], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[123:124], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[124:125], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[125:126], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[134:135], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[135:136], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[136:137], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[137:138], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[138:139], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[139:140], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[140:141], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[141:142], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[142:143], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[143:144], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[144:145], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[155:156], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[156:157], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[157:158], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[158:159], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[159:160], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[160:161], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[161:162], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[162:163], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[163:164], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[164:165], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[175:176], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[176:177], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[177:178], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[178:179], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[179:180], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[180:181], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[181:182], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[182:183], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[183:184], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[184:185], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[195:196], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[196:197], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[197:198], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[198:199], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[199:200], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[200:201], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[201:202], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[202:203], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[203:204], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[204:205], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[215:216], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[216:217], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[217:218], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[218:219], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[219:220], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[220:221], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[221:222], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[222:223], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[223:224], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[224:225], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[235:236], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[236:237], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[237:238], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[238:239], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[239:240], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[240:241], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[241:242], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[242:243], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[243:244], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[244:245], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[255:256], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[256:257], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[257:258], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[258:259], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[259:260], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[260:261], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[261:262], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[262:263], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[263:264], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[264:265], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[265:266], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[274:275], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[275:276], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[276:277], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[277:278], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[278:279], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[279:280], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[280:281], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[281:282], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[282:283], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[283:284], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[284:285], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[285:286], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[286:287], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[293:294], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[294:295], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[295:296], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[296:297], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[297:298], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[298:299], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[299:300], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[300:301], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[301:302], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[302:303], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[303:304], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[304:305], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[305:306], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[306:307], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[307:308], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[308:309], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[309:310], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[310:311], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[311:312], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[312:313], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[313:314], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[314:315], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[315:316], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[316:317], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[317:318], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[318:319], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[319:320], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[320:321], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[321:322], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[322:323], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[323:324], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[324:325], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[325:326], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[326:327], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[327:328], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[328:329], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[329:330], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[330:331], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[331:332], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[332:333], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[333:334], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[334:335], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[335:336], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[336:337], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[337:338], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[338:339], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[339:340], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[340:341], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[341:342], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[342:343], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[343:344], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[344:345], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[345:346], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[346:347], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[347:348], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[348:349], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[349:350], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[350:351], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[351:352], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[352:353], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[353:354], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[354:355], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[355:356], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[356:357], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[357:358], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[358:359], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[359:360], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[360:361], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[361:362], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[362:363], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[363:364], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[364:365], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[365:366], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[366:367], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[367:368], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[368:369], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[369:370], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[370:371], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[371:372], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[372:373], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[373:374], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[374:375], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[375:376], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[376:377], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[377:378], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[378:379], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[379:380], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[380:381], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[381:382], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[382:383], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[383:384], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[384:385], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[385:386], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[386:387], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[387:388], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[388:389], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[389:390], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[390:391], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[391:392], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[392:393], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[393:394], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[394:395], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[395:396], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[396:397], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[397:398], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[398:399], 
+    mdb.models['Model-1'].parts['orphan mesh'].elements[399:400]], name=
+    'Set-1_alpha_1')
+mdb.models['Model-1'].rootAssembly.regenerate()
+del mdb.models['Model-1'].rootAssembly.features['orphan mesh-1']
+del mdb.models['Model-1'].rootAssembly.features['Part-1']
+del mdb.models['Model-1'].steps['Step-1']
+del mdb.models['Model-1'].sections['Section-1_alpha_0']
+del mdb.models['Model-1'].sections['Section-2_alpha_1']
+del mdb.models['Model-1'].parts['Part-1']
+mdb.models['Model-1'].materials['Material-2_alph_1'].elastic.setValues(table=((
+    200000000000.0, 0.3), ))
+mdb.models['Model-1'].HomogeneousSolidSection(material='Material-1_alpha_0', 
+    name='Section-1_alpha0', thickness=0.1)
+mdb.models['Model-1'].HomogeneousSolidSection(material='Material-2_alph_1', 
+    name='Section-2_alpha1', thickness=0.1)
+mdb.models['Model-1'].parts['orphan mesh'].SectionAssignment(offset=0.0, 
+    offsetField='', offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-1'].parts['orphan mesh'].sets['Set-1_alpha_0'], 
+    sectionName='Section-1_alpha0', thicknessAssignment=FROM_SECTION)
+mdb.models['Model-1'].parts['orphan mesh'].SectionAssignment(offset=0.0, 
+    offsetField='', offsetType=MIDDLE_SURFACE, region=
+    mdb.models['Model-1'].parts['orphan mesh'].sets['Set-1_alpha_1'], 
+    sectionName='Section-2_alpha1', thicknessAssignment=FROM_SECTION)
+mdb.models['Model-1'].rootAssembly.Instance(dependent=ON, name='orphan mesh-1', 
+    part=mdb.models['Model-1'].parts['orphan mesh'])
+mdb.models['Model-1'].StaticStep(name='Step-1', previous='Initial')
+mdb.models['Model-1'].rootAssembly.Surface(face3Elements=
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].elements[380:400]
+    , name='Surf-1')
+mdb.models['Model-1'].Pressure(amplitude=UNSET, createStepName='Step-1', 
+    distributionType=UNIFORM, field='', magnitude=1000.0, name='Load-1', 
+    region=mdb.models['Model-1'].rootAssembly.surfaces['Surf-1'])
+mdb.models['Model-1'].rootAssembly.Set(name='Set-1', nodes=
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[0:1]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[20:22]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[41:43]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[62:64]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[83:85]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[104:106]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[125:127]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[146:148]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[167:169]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[188:190]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[209:211]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[230:232]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[251:253]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[272:274]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[293:295]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[314:316]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[335:337]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[356:358]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[377:379]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[398:400]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[419:421]+\
+    mdb.models['Model-1'].rootAssembly.instances['orphan mesh-1'].nodes[440:441])
+mdb.models['Model-1'].DisplacementBC(amplitude=UNSET, createStepName='Step-1', 
+    distributionType=UNIFORM, fieldName='', fixed=OFF, localCsys=None, name=
+    'BC-1', region=mdb.models['Model-1'].rootAssembly.sets['Set-1'], u1=0.0, 
+    u2=0.0, ur3=0.0)
+mdb.Job(atTime=None, contactPrint=OFF, description='', echoPrint=OFF, 
+    explicitPrecision=SINGLE, getMemoryFromAnalysis=True, historyPrint=OFF, 
+    memory=90, memoryUnits=PERCENTAGE, model='Model-1', modelPrint=OFF, name=
+    'Job-3', nodalOutputPrecision=SINGLE, queue=None, resultsFormat=ODB, 
+    scratch='', type=ANALYSIS, userSubroutine='', waitHours=0, waitMinutes=0)
+mdb.jobs['Job-3'].submit(consistencyChecking=OFF)
+mdb.jobs['Job-3']._Message(STARTED, {'phase': BATCHPRE_PHASE, 
+    'clientHost': 'Srikkanth', 'handle': 0, 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'FOR TWO-DIMENSIONAL MODELS, IF A NON-UNITY THICKNESS IS SPECIFIED FOR TWO-DIMENSIONAL SOLID ELEMENTS AND THESE ELEMENTS ARE INVOLVED IN AN INTERACTION SUCH AS CONTACT, THE SAME THICKNESS SHOULD BE SPECIFIED FOR THE OUT-OF-PLANE THICKNESS OF THE CORRESPONDING SURFACE UNDER *SURFACE INTERACTION.', 
+    'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(WARNING, {'phase': BATCHPRE_PHASE, 
+    'message': 'Boundary conditions are specified on inactive dof of 42 nodes. The nodes have been identified in node set WarnNodeBCInactiveDof.', 
+    'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(ODB_FILE, {'phase': BATCHPRE_PHASE, 
+    'file': 'D:\\TUM\\SEM_II\\Software_lab\\Stl_file_import\\Job-3.odb', 
+    'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(COMPLETED, {'phase': BATCHPRE_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(STARTED, {'phase': STANDARD_PHASE, 
+    'clientHost': 'Srikkanth', 'handle': 12476, 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 0, 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(MEMORY_ESTIMATE, {'phase': STANDARD_PHASE, 
+    'jobName': 'Job-3', 'memory': 24.0})
+mdb.jobs['Job-3']._Message(PHYSICAL_MEMORY, {'phase': STANDARD_PHASE, 
+    'physical_memory': 8055.0, 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(MINIMUM_MEMORY, {'minimum_memory': 17.0, 
+    'phase': STANDARD_PHASE, 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(ODB_FRAME, {'phase': STANDARD_PHASE, 'step': 0, 
+    'frame': 1, 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(STATUS, {'totalTime': 1.0, 'attempts': 1, 
+    'timeIncrement': 1.0, 'increment': 1, 'stepTime': 1.0, 'step': 1, 
+    'jobName': 'Job-3', 'severe': 0, 'iterations': 1, 'phase': STANDARD_PHASE, 
+    'equilibrium': 1})
+mdb.jobs['Job-3']._Message(END_STEP, {'phase': STANDARD_PHASE, 'stepId': 1, 
+    'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(COMPLETED, {'phase': STANDARD_PHASE, 
+    'message': 'Analysis phase complete', 'jobName': 'Job-3'})
+mdb.jobs['Job-3']._Message(JOB_COMPLETED, {'time': 'Tue Jul  3 14:24:34 2018', 
+    'jobName': 'Job-3'})
